@@ -1,10 +1,14 @@
 // Enemies our player must avoid
-const Enemy = function() {
+const Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
-
-
+    this.x = x;
+	this.y = y + 55;
+	this.xMove = 101;
+	this.speed = speed;
+	this.initialPos = - this.xMove;
+	this.edge = this.xMove * 5;
+    
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -16,6 +20,16 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // if enemy is not passed boundary
+	if (this.x < this.edge) {
+		// move forward
+		// Increment x by speed * dt
+		this.x += this.speed * dt;
+	}
+	else
+		// reset pos to start
+		this.x = this.initialPos;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -52,7 +66,7 @@ class PlayerMain {
 		else if (input == 'up' && this.y > 0) {
 				this.y -= this.yMove;
 		}
-		
+
 		else if (input == 'right' && this.x < this.xMove * 4) {
 			this.x += this.xMove;
 		}
@@ -60,14 +74,22 @@ class PlayerMain {
 				this.y += this.yMove;
 		}
 	}
-	
+
 }
 
 // Now instantiate your objects.
-const player = new PlayerMain();
 
 // Place all enemy objects in an array called allEnemies
+const firstEnemy = new Enemy(-101, 0, 200);
+const secondEnemy = new Enemy(-101, 83, 300);
+const thirdEnemy = new Enemy((-101 * 3), 83, 300);
+const fourthEnemy = new Enemy((-101 * 2.5), (83*2), 400);
+
+const allEnemies = [];
+allEnemies.push(firstEnemy,secondEnemy,thirdEnemy,fourthEnemy);
+
 // Place the player object in a variable called player
+const player = new PlayerMain();
 
 
 
