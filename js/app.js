@@ -48,17 +48,18 @@ class PlayerMain {
 		this.xMove = 101;
 		this.yMove = 83;
 		this.startX = this.xMove* 2;
-		this.startY = (this.yMove* 5) - 2;
+		this.startY = (this.yMove* 4) + 55;
 		this.x = this.startX;
 		this.y = this.startY;
+		this.win = false;
 	}
 
-	// Draw player at the current position.
+	// Method to draw player at the current position.
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
 
-	//Handle keyboared inputs
+	// Method to handle keyboared inputs.
 	handleInput(input) {
 		if (input == 'left' && this.x > 0) {
 			this.x -= this.xMove;
@@ -73,6 +74,32 @@ class PlayerMain {
 		else if (input == 'down' && this.y < this.yMove * 4) {
 				this.y += this.yMove;
 		}
+	}
+
+	// Method to update.
+	update() {
+		// Check collision.
+		for (let enemy of allEnemies) {
+			if (this.y === enemy.y && 
+				(enemy.x + enemy.xMove/2 > this.x && 
+					enemy.x < this.x + this.xMove/2)
+				) {
+				this.reset();
+
+			}
+		// Check for win.
+			if (this.y === 55) {
+				this.win = true;
+			}
+
+		}
+
+	}
+
+	// Reset mainPlayer.
+	reset() {
+		this.x = this.startX;
+		this.y = this.startY;
 	}
 
 }
