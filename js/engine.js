@@ -31,7 +31,6 @@ var Engine = (function(global) {
 
 	let modal = document.querySelector('.modal_overlay');
 	let replay = document.querySelector('.modal_replay');
-    let start = document.querySelector('.modal_start');
 
 
     replay.addEventListener('click', function() {
@@ -69,19 +68,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
 
-         // Function to get game win or lost message to modal.
-        /*function winLostMessage() {
-            let modalWon = document.getElementById("won").innerHTML;
-            if (moves > cardsClickCount && matchedCards < totalCardsPairs) {
-                    let lost = modalWon.replace(modalWon, "***  Sorry, You Lost!  ***");
-                    document.getElementById("won").innerHTML = lost;
-            } else {
-                if (matchedCards === totalCardsPairs) {
-                    modalWon;
-                }
-            }
-        }*/
-
+        // Determine win
 		if (player.win === true) {
 			 win.cancelAnimationFrame(id);
 			 modal.classList.toggle('hide');
